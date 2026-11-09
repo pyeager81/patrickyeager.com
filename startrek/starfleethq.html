@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfleet Command HQ - Tactical Fan Division</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Antonio & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        lcars: ['Antonio', 'sans-serif'],
+                        tech: ['Share Tech Mono', 'monospace'],
+                        tos: ['Orbitron', 'sans-serif']
+                    },
+                    colors: {
+                        // TNG Palette
+                        tng: {
+                            gold: '#ff9900',
+                            amber: '#ffcc00',
+                            orange: '#ff6600',
+                            purple: '#cc99cc',
+                            blue: '#9999cc',
+                            red: '#cc3333',
+                            bg: '#000000',
+                            panel: '#111118'
+                        },
+                        // TOS Palette
+                        tos: {
+                            gold: '#e2b13c',
+                            red: '#ce2029',
+                            blue: '#2a7bb6',
+                            grey: '#a8b0b8',
+                            bg: '#05070a'
+                        },
+                        // DS9 Palette
+                        ds9: {
+                            crimson: '#990000',
+                            violet: '#663366',
+                            steel: '#4a6b82',
+                            gold: '#cc9900',
+                            bg: '#030508'
+                        },
+                        // VOY Palette
+                        voy: {
+                            cyan: '#00ccff',
+                            cobalt: '#0066cc',
+                            silver: '#99ccff',
+                            amber: '#ffaa00',
+                            bg: '#010814'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Theme Variables Dynamic Styling */
+        :root {
+            --lcars-primary: #ff9900;
+            --lcars-secondary: #ffcc00;
+            --lcars-accent: #cc99cc;
+            --lcars-danger: #cc3333;
+            --lcars-bg: #000000;
+            --lcars-panel: #0d0e15;
+            --lcars-border-radius: 20px;
+            --font-main: 'Antonio', sans-serif;
+        }
+
+        /* Era Custom Theme Overrides */
+        body.theme-tos {
+            --lcars-primary: #e2b13c;
+            --lcars-secondary: #ce2029;
+            --lcars-accent: #2a7bb6;
+            --lcars-danger: #ff0000;
+            --lcars-bg: #05070a;
+            --lcars-panel: #141923;
+            --lcars-border-radius: 4px;
+            --font-main: 'Orbitron', sans-serif;
+        }
+
+        body.theme-ds9 {
+            --lcars-primary: #990000;
+            --lcars-secondary: #663366;
+            --lcars-accent: #4a6b82;
+            --lcars-danger: #ff1100;
+            --lcars-bg: #030508;
+            --lcars-panel: #0f141c;
+            --lcars-border-radius: 10px;
+            --font-main: 'Antonio', sans-serif;
+        }
+
+        body.theme-voy {
+            --lcars-primary: #00ccff;
+            --lcars-secondary: #0066cc;
+            --lcars-accent: #ffaa00;
+            --lcars-danger: #ff3333;
+            --lcars-bg: #010814;
+            --lcars-panel: #0a1324;
+            --lcars-border-radius: 25px;
+            --font-main: 'Antonio', sans-serif;
+        }
+
+        body {
+            background-color: var(--lcars-bg);
+            color: #ffffff;
+            font-family: var(--font-main);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Custom Scrollbars for LCARS aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--lcars-primary);
+            border-radius: 4px;
+        }
+
+        /* LCARS Pill Layout Mechanics */
+        .lcars-pill {
+            border-radius: var(--lcars-border-radius);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .lcars-btn {
+            background-color: var(--lcars-primary);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.1s ease, filter 0.2s ease, background-color 0.3s;
+            user-select: none;
+        }
+        .lcars-btn:hover {
+            filter: brightness(1.25);
+            transform: scale(1.02);
+        }
+        .lcars-btn:active {
+            transform: scale(0.97);
+            filter: brightness(0.9);
+        }
+
+        .lcars-btn-secondary {
+            background-color: var(--lcars-secondary);
+        }
+        .lcars-btn-accent {
+            background-color: var(--lcars-accent);
+        }
+        .lcars-btn-danger {
+            background-color: var(--lcars-danger);
+            color: #fff;
+        }
+
+        /* Red Alert Pulse Overlay Effect */
+        @keyframes redAlertPulse {
+            0% { box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2); background-color: rgba(255, 0, 0, 0.02); }
+            50% { box-shadow: inset 0 0 80px rgba(255, 0, 0, 0.6); background-color: rgba(255, 0, 0, 0.15); }
+            100% { box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2); background-color: rgba(255, 0, 0, 0.02); }
+        }
+
+        .red-alert-active {
+            animation: redAlertPulse 1.2s infinite ease-in-out;
+        }
+
+        /* Dynamic Starfield Canvas Behind Everything */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="theme-tng h-full min-h-screen flex flex-col overflow-x-hidden select-none">
+
+    <!-- Starfield Canvas -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Main Container -->
+    <div class="content-layer flex-1 flex flex-col p-2 md:p-6 max-w-[1700px] mx-auto w-full">
+
+        <!-- LCARS Header & Era Switcher Toolbar -->
+        <header class="flex flex-col md:flex-row gap-3 items-stretch mb-4">
+            <!-- Left LCARS Header Bar Title -->
+            <div class="flex items-center gap-3 bg-[var(--lcars-primary)] text-black px-6 py-3 rounded-t-2xl md:rounded-l-full md:rounded-tr-none min-w-[280px]">
+                <svg class="w-10 h-10 fill-current" viewBox="0 0 100 100">
+                    <!-- Standard Starfleet Insignia Outline -->
+                    <path d="M50,5 C50,5 90,85 85,90 C80,95 55,75 50,75 C45,75 20,95 15,90 C10,85 50,5 50,5 Z" fill="none" stroke="#000" stroke-width="6"/>
+                    <path d="M50,15 L78,80 L52,65 L50,65 L48,65 L22,80 Z" fill="#000"/>
+                    <line x1="20" y1="50" x2="80" y2="50" stroke="#000" stroke-width="4"/>
+                </svg>
+                <div>
+                    <h1 class="text-2xl font-black tracking-widest leading-none">STARFLEET</h1>
+                    <div class="text-xs font-bold tracking-wider opacity-80">TACTICAL FAN COMMAND</div>
+                </div>
+            </div>
+
+            <!-- Central Tactical Command Bar -->
+            <div class="flex-1 bg-[var(--lcars-panel)] border-l-8 border-[var(--lcars-secondary)] p-3 rounded-r-xl flex flex-wrap items-center justify-between gap-4 shadow-lg border-y border-white/10">
+                <!-- Stardate & Sector Status -->
+                <div class="flex items-center gap-6 text-sm font-tech">
+                    <div>
+                        <span class="text-[var(--lcars-accent)] uppercase">STARDATE:</span>
+                        <span id="stardate-display" class="text-yellow-400 font-bold ml-1">47634.1</span>
+                    </div>
+                    <div class="hidden sm:block">
+                        <span class="text-[var(--lcars-accent)] uppercase">SECTOR:</span>
+                        <span class="text-emerald-400 font-bold ml-1">001 (SOL)</span>
+                    </div>
+                    <div class="hidden md:flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span id="subsystem-status" class="text-xs tracking-wider text-gray-300">SYSTEMS NOMINAL</span>
+                    </div>
+                </div>
+
+                <!-- Controls: Sound & Warp Drive Toggle -->
+                <div class="flex items-center gap-2 flex-wrap">
+                    <!-- Warp Drive Speed Button -->
+                    <button id="warp-btn" onclick="toggleWarpSpeed()" class="lcars-btn text-xs px-3 py-1.5 rounded-full border border-black/30 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bolt text-xs"></i>
+                        <span id="warp-text">WARP SPEED</span>
+                    </button>
+
+                    <!-- Red Alert Toggle Button -->
+                    <button id="red-alert-btn" onclick="toggleRedAlert()" class="lcars-btn bg-red-600 hover:bg-red-500 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>RED ALERT</span>
+                    </button>
+
+                    <!-- Web Audio SFX Mute/Unmute -->
+                    <button id="audio-toggle-btn" onclick="toggleAudio()" class="lcars-btn lcars-btn-accent text-xs px-3 py-1.5 rounded-full flex items-center gap-1">
+                        <i id="audio-icon" class="fa-solid fa-volume-high"></i>
+                        <span id="audio-status">AUDIO ON</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Era Theme Selector -->
+            <div class="bg-[var(--lcars-panel)] p-2 rounded-xl flex items-center justify-around gap-1 border border-white/10">
+                <button onclick="setEraTheme('tos')" class="theme-tab-btn px-3 py-1.5 rounded text-xs font-bold transition hover:bg-yellow-500/20 text-yellow-500 border border-yellow-500/30">TOS</button>
+                <button onclick="setEraTheme('tng')" class="theme-tab-btn px-3 py-1.5 rounded text-xs font-bold transition hover:bg-amber-500/20 text-amber-500 border border-amber-500/50 bg-amber-500/20">TNG</button>
+                <button onclick="setEraTheme('ds9')" class="theme-tab-btn px-3 py-1.5 rounded text-xs font-bold transition hover:bg-red-500/20 text-red-500 border border-red-500/30">DS9</button>
+                <button onclick="setEraTheme('voy')" class="theme-tab-btn px-3 py-1.5 rounded text-xs font-bold transition hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">VOY</button>
+            </div>
+        </header>
+
+        <!-- Main Body LCARS Layout -->
+        <div class="flex-1 flex flex-col md:flex-row gap-4 items-stretch">
+
+            <!-- Left LCARS Side Column Frame -->
+            <aside class="w-full md:w-64 flex flex-col gap-2 shrink-0">
+                <!-- Pill Cap Top -->
+                <div class="h-8 bg-[var(--lcars-primary)] rounded-t-full rounded-br-none flex items-center justify-end pr-4 text-black text-xs font-bold">
+                    LCARS 4791
+                </div>
+
+                <!-- Navigation Buttons Stack -->
+                <nav class="flex flex-col gap-2 flex-1">
+                    <button onclick="switchTab('bridge')" class="nav-btn lcars-btn text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-display mr-2"></i> COMMAND BRIDGE</span>
+                        <span class="text-xs font-tech opacity-75">01</span>
+                    </button>
+                    <button onclick="switchTab('roster')" class="nav-btn lcars-btn lcars-btn-secondary text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-users mr-2"></i> FLEET ROSTER</span>
+                        <span class="text-xs font-tech opacity-75">02</span>
+                    </button>
+                    <button onclick="switchTab('tactical')" class="nav-btn lcars-btn lcars-btn-accent text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-shield-halved mr-2"></i> TACTICAL SIM</span>
+                        <span class="text-xs font-tech opacity-75">03</span>
+                    </button>
+                    <button onclick="switchTab('sectors')" class="nav-btn lcars-btn text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-map-location-dot mr-2"></i> SECTOR MAP</span>
+                        <span class="text-xs font-tech opacity-75">04</span>
+                    </button>
+                    <button onclick="switchTab('holodeck')" class="nav-btn lcars-btn lcars-btn-secondary text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-vr-cardboard mr-2"></i> HOLODECK NEWS</span>
+                        <span class="text-xs font-tech opacity-75">05</span>
+                    </button>
+                    <button onclick="switchTab('enlist')" class="nav-btn lcars-btn lcars-btn-accent text-left px-5 py-3 rounded-r-full text-lg flex items-center justify-between">
+                        <span><i class="fa-solid fa-id-card mr-2"></i> ENLIST / COMMISSION</span>
+                        <span class="text-xs font-tech opacity-75">06</span>
+                    </button>
+                </nav>
+
+                <!-- LCARS Side Panel Visual Filler Blocks -->
+                <div class="hidden md:flex flex-col gap-1.5 mt-auto">
+                    <div class="h-6 bg-[var(--lcars-accent)] rounded-r-md opacity-80"></div>
+                    <div class="h-10 bg-[var(--lcars-secondary)] rounded-r-md flex items-center px-3 text-black font-tech text-xs justify-between">
+                        <span>SYS DIAGNOSTIC</span>
+                        <span>ONLINE</span>
+                    </div>
+                    <div class="h-4 bg-[var(--lcars-primary)] rounded-b-full"></div>
+                </div>
+            </aside>
+
+            <!-- Center Content Workspace (Tabs Container) -->
+            <main class="flex-1 bg-[var(--lcars-panel)] border-2 border-[var(--lcars-primary)]/40 rounded-2xl p-4 md:p-6 shadow-2xl overflow-y-auto min-h-[550px] flex flex-col justify-between">
+
+                <!-- TABS CONTENT AREA -->
+
+                <!-- 1. COMMAND BRIDGE (Home Overview Dashboard) -->
+                <div id="tab-bridge" class="tab-pane flex-1 flex flex-col gap-6">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3 flex justify-between items-end">
+                        <div>
+                            <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">STARFLEET COMMAND HQ</h2>
+                            <p class="text-sm text-gray-400 font-tech">OFFICIAL TACTICAL DIVISION & FAN CLUB DIRECTORY</p>
+                        </div>
+                        <span class="px-3 py-1 bg-[var(--lcars-secondary)] text-black font-bold text-xs rounded-full">GRID SEC-01</span>
+                    </div>
+
+                    <!-- Welcome Banner -->
+                    <div class="relative rounded-xl overflow-hidden bg-gradient-to-r from-blue-950/80 via-slate-900 to-amber-950/80 p-6 border border-white/10 flex flex-col lg:flex-row items-center gap-6">
+                        <div class="flex-1 space-y-3">
+                            <span class="inline-block px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 rounded text-xs font-tech">COMMUNIQUE: ADMIRALTY DIRECTIVE</span>
+                            <h3 class="text-2xl font-bold">Welcome to the Starfleet Command Division</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Greetings, Captain. This site acts as the central command node for Starfleet Command Tactical Division fans worldwide. Explore our personnel databases, simulate tactical starship engagements, locate local regional chapters, or apply for an official fan division rank commission.
+                            </p>
+                            <div class="flex gap-3 pt-2">
+                                <button onclick="switchTab('enlist')" class="lcars-btn px-4 py-2 text-sm rounded-lg">JOIN THE FLEET</button>
+                                <button onclick="switchTab('tactical')" class="lcars-btn lcars-btn-secondary px-4 py-2 text-sm rounded-lg">RUN DIAGNOSTICS</button>
+                            </div>
+                        </div>
+                        <!-- Decorative Bridge Diagram Graphic -->
+                        <div class="w-full lg:w-64 h-40 bg-black/50 border border-[var(--lcars-primary)]/40 rounded-lg p-3 flex flex-col justify-between relative overflow-hidden">
+                            <div class="text-[10px] font-tech text-gray-400">USS ENTERPRISE NCC-1701-E</div>
+                            <div class="flex items-center justify-center my-auto">
+                                <div class="w-24 h-24 rounded-full border-4 border-[var(--lcars-primary)] border-t-transparent animate-spin"></div>
+                                <i class="fa-solid fa-space-shuttle absolute text-3xl text-[var(--lcars-accent)]"></i>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-tech text-emerald-400">
+                                <span>WARP: 9.975</span>
+                                <span>SHIELDS: 100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strategic Quick Stats -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-black/40 border border-[var(--lcars-primary)]/30 p-4 rounded-xl flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-[var(--lcars-primary)]/20 text-[var(--lcars-primary)] flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-users-gear"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-tech">ACTIVE CADETS</div>
+                                <div class="text-2xl font-bold">14,285</div>
+                            </div>
+                        </div>
+                        <div class="bg-black/40 border border-[var(--lcars-secondary)]/30 p-4 rounded-xl flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-[var(--lcars-secondary)]/20 text-[var(--lcars-secondary)] flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-tech">ACTIVE CHAPTERS</div>
+                                <div class="text-2xl font-bold">342</div>
+                            </div>
+                        </div>
+                        <div class="bg-black/40 border border-[var(--lcars-accent)]/30 p-4 rounded-xl flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-[var(--lcars-accent)]/20 text-[var(--lcars-accent)] flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-tech">QUADRANT SECTORS</div>
+                                <div class="text-2xl font-bold">ALPHA / BETA</div>
+                            </div>
+                        </div>
+                        <div class="bg-black/40 border border-emerald-500/30 p-4 rounded-xl flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-tech">MAIN COMPUTER</div>
+                                <div class="text-2xl font-bold text-emerald-400">ONLINE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. FLEET PERSONNEL ROSTER TABS -->
+                <div id="tab-roster" class="tab-pane hidden flex-1 flex flex-col gap-4">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <div>
+                            <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">FEDERATION PERSONNEL DATABASE</h2>
+                            <p class="text-sm text-gray-400 font-tech">COMMANDING OFFICERS & FAN DIVISION OFFICERS</p>
+                        </div>
+                        <!-- Department Filter -->
+                        <div class="flex gap-2">
+                            <button onclick="filterRoster('all')" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">ALL</button>
+                            <button onclick="filterRoster('Command')" class="px-3 py-1 bg-red-900/60 text-red-300 hover:bg-red-800 rounded text-xs">COMMAND</button>
+                            <button onclick="filterRoster('Operations')" class="px-3 py-1 bg-yellow-900/60 text-yellow-300 hover:bg-yellow-800 rounded text-xs">OPERATIONS</button>
+                            <button onclick="filterRoster('Sciences')" class="px-3 py-1 bg-blue-900/60 text-blue-300 hover:bg-blue-800 rounded text-xs">SCIENCES</button>
+                        </div>
+                    </div>
+
+                    <!-- Personnel Grid Cards Container -->
+                    <div id="roster-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Dynamic Personnel Inserted via JS -->
+                    </div>
+                </div>
+
+                <!-- 3. TACTICAL SIMULATOR TAB -->
+                <div id="tab-tactical" class="tab-pane hidden flex-1 flex flex-col gap-6">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">STARSHIP TACTICAL SIMULATOR</h2>
+                            <p class="text-sm text-gray-400 font-tech">SUB-SYSTEM CONTROL & POWER DISTRIBUTION</p>
+                        </div>
+                        <button onclick="resetSim()" class="lcars-btn px-3 py-1 text-xs rounded">RESET OVERRIDE</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Power Allocation Gauges -->
+                        <div class="bg-black/50 border border-[var(--lcars-primary)]/40 p-5 rounded-xl space-y-5">
+                            <h3 class="text-lg font-bold text-[var(--lcars-secondary)] border-b border-gray-800 pb-2">REACTOR POWER ALLOCATION</h3>
+                            
+                            <!-- Warp Drive Slider -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-tech">
+                                    <span>WARP CORE ENGINES</span>
+                                    <span id="power-warp-val" class="text-yellow-400">75%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="75" oninput="updatePower('warp', this.value)" class="w-full accent-[var(--lcars-primary)] cursor-pointer">
+                            </div>
+
+                            <!-- Deflector Shields Slider -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-tech">
+                                    <span>DEFLECTOR SHIELDS</span>
+                                    <span id="power-shield-val" class="text-cyan-400">100%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="100" oninput="updatePower('shield', this.value)" class="w-full accent-cyan-400 cursor-pointer">
+                            </div>
+
+                            <!-- Tactical Systems Slider -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-tech">
+                                    <span>PHASERS & TORPEDO BANKE</span>
+                                    <span id="power-weapons-val" class="text-red-400">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" oninput="updatePower('weapons', this.value)" class="w-full accent-red-500 cursor-pointer">
+                            </div>
+
+                            <!-- Impulse Engines Slider -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-tech">
+                                    <span>IMPULSE ENGINES</span>
+                                    <span id="power-impulse-val" class="text-emerald-400">80%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="80" oninput="updatePower('impulse', this.value)" class="w-full accent-emerald-400 cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- Tactical Interactive Display Controls -->
+                        <div class="bg-black/50 border border-[var(--lcars-secondary)]/40 p-5 rounded-xl flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-[var(--lcars-accent)] border-b border-gray-800 pb-2 mb-4">TACTICAL TEST DISCHARGES</h3>
+                                <div class="grid grid-cols-2 gap-3 mb-6">
+                                    <button onclick="playTacticalSound('phaser')" class="lcars-btn bg-red-600 text-white p-3 rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-red-500">
+                                        <i class="fa-solid fa-bolt text-lg"></i>
+                                        <span class="text-xs">FIRE PHASERS</span>
+                                    </button>
+                                    <button onclick="playTacticalSound('torpedo')" class="lcars-btn bg-amber-600 text-black p-3 rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-amber-500">
+                                        <i class="fa-solid fa-circle-dot text-lg"></i>
+                                        <span class="text-xs">LAUNCH TORPEDO</span>
+                                    </button>
+                                    <button onclick="playTacticalSound('shield')" class="lcars-btn lcars-btn-accent p-3 rounded-lg flex flex-col items-center justify-center gap-1">
+                                        <i class="fa-solid fa-shield text-lg"></i>
+                                        <span class="text-xs">RAISE SHIELDS</span>
+                                    </button>
+                                    <button onclick="playTacticalSound('hail')" class="lcars-btn lcars-btn-secondary p-3 rounded-lg flex flex-col items-center justify-center gap-1">
+                                        <i class="fa-solid fa-tower-cell text-lg"></i>
+                                        <span class="text-xs">HAIL FREQUENCY</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Diagnostic Console Stream -->
+                            <div class="bg-black p-3 rounded border border-gray-800 font-tech text-xs h-32 overflow-y-auto space-y-1 text-emerald-400" id="tactical-log">
+                                <div>[LOG] LCARS Tactical subroutines initialized.</div>
+                                <div>[LOG] Reactor output balanced at 100% efficiency.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SECTOR MAP & CHAPTER LOCATOR -->
+                <div id="tab-sectors" class="tab-pane hidden flex-1 flex flex-col gap-4">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">STARFLEET CHAPTER LOCATOR</h2>
+                            <p class="text-sm text-gray-400 font-tech">LOCAL CHAPTER DIRECTORY & SECTOR COMMAND HQ</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Interactive Grid Vector Canvas/Box -->
+                        <div class="lg:col-span-2 bg-black/60 border border-[var(--lcars-primary)]/40 rounded-xl p-4 flex flex-col h-[400px] relative overflow-hidden">
+                            <div class="text-xs font-tech text-[var(--lcars-primary)] flex justify-between mb-2">
+                                <span>SECTOR 001 MULTI-VECTOR RADAR</span>
+                                <span>RANGE: 15 LIGHT YEARS</span>
+                            </div>
+
+                            <!-- Radar Tactical Grid Simulation -->
+                            <div class="flex-1 relative rounded border border-emerald-500/20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-950/20 via-black to-black flex items-center justify-center">
+                                <!-- Concentric Circles -->
+                                <div class="absolute w-72 h-72 border border-emerald-500/20 rounded-full"></div>
+                                <div class="absolute w-48 h-48 border border-emerald-500/20 rounded-full"></div>
+                                <div class="absolute w-24 h-24 border border-emerald-500/30 rounded-full"></div>
+                                <div class="absolute w-full h-px bg-emerald-500/20"></div>
+                                <div class="absolute h-full w-px bg-emerald-500/20"></div>
+
+                                <!-- Dynamic Chapter Markers -->
+                                <div onclick="showChapterInfo('Earth HQ - Sector 001', 'San Francisco, Terra', 'Admiral Vance', '2,450 Cadets')" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer group">
+                                    <span class="w-4 h-4 bg-yellow-400 rounded-full block animate-ping opacity-75 absolute"></span>
+                                    <span class="w-4 h-4 bg-yellow-400 rounded-full block relative border-2 border-black"></span>
+                                    <span class="absolute top-5 -left-12 bg-black/80 px-2 py-0.5 rounded text-[10px] text-yellow-300 font-tech whitespace-nowrap opacity-0 group-hover:opacity-100 transition">EARTH HQ</span>
+                                </div>
+
+                                <div onclick="showChapterInfo('USS Titan Chapter', 'Sector 002 Orbit', 'Captain Shaw', '180 Cadets')" class="absolute top-1/3 left-1/3 cursor-pointer group">
+                                    <span class="w-3 h-3 bg-cyan-400 rounded-full block border border-black"></span>
+                                    <span class="absolute top-4 -left-8 bg-black/80 px-2 py-0.5 rounded text-[10px] text-cyan-300 font-tech whitespace-nowrap opacity-0 group-hover:opacity-100 transition">TITAN SECTOR</span>
+                                </div>
+
+                                <div onclick="showChapterInfo('Vulcan Tactical Outpost', 'Sector 005 - Vulcan', 'Commander T\'Pring', '620 Cadets')" class="absolute bottom-1/4 right-1/3 cursor-pointer group">
+                                    <span class="w-3 h-3 bg-red-400 rounded-full block border border-black"></span>
+                                    <span class="absolute top-4 -left-8 bg-black/80 px-2 py-0.5 rounded text-[10px] text-red-300 font-tech whitespace-nowrap opacity-0 group-hover:opacity-100 transition">VULCAN DIVISION</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chapter Detail Card -->
+                        <div class="bg-black/50 border border-[var(--lcars-secondary)]/40 rounded-xl p-5 flex flex-col justify-between">
+                            <div>
+                                <h3 id="chap-title" class="text-xl font-bold text-[var(--lcars-primary)] mb-2">EARTH HQ CHAPTER</h3>
+                                <div class="space-y-3 font-tech text-sm">
+                                    <div>
+                                        <span class="text-gray-400 block text-xs">LOCATION:</span>
+                                        <span id="chap-location" class="text-white">San Francisco, Terra</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-400 block text-xs">COMMANDING OFFICER:</span>
+                                        <span id="chap-co" class="text-yellow-400">Admiral Vance</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-400 block text-xs">ACTIVE CADET MEMBERSHIP:</span>
+                                        <span id="chap-cadets" class="text-emerald-400">2,450 Cadets</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-400 block text-xs">MEETING SCHEDULE:</span>
+                                        <span class="text-gray-300">Bi-Weekly Holodeck Session & Live Q&A</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="switchTab('enlist')" class="lcars-btn w-full py-2.5 rounded-lg text-sm mt-4">JOIN THIS CHAPTER</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. HOLODECK EVENTS & NEWS BROADCASTS -->
+                <div id="tab-holodeck" class="tab-pane hidden flex-1 flex flex-col gap-4">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">HOLODECK & FLEET NEWS BROADCASTS</h2>
+                            <p class="text-sm text-gray-400 font-tech">UPCOMING CONVENTIONS & STARFLEET DISPATCHES</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- News Card 1 -->
+                        <div class="bg-black/40 border-l-4 border-[var(--lcars-primary)] p-4 rounded-r-xl space-y-2">
+                            <span class="text-xs font-tech text-yellow-400">STARDATE 47630.5</span>
+                            <h3 class="text-lg font-bold text-white">Annual Sector Convention Announced</h3>
+                            <p class="text-sm text-gray-300">Join over 5,000 fan officers at the annual Starfleet Command tactical summit. Panel discussions include prop building, LCARS UI design, and canon debates.</p>
+                            <button class="lcars-btn px-3 py-1 text-xs rounded">RSVP TO HOLODECK</button>
+                        </div>
+
+                        <!-- News Card 2 -->
+                        <div class="bg-black/40 border-l-4 border-[var(--lcars-secondary)] p-4 rounded-r-xl space-y-2">
+                            <span class="text-xs font-tech text-yellow-400">STARDATE 47622.1</span>
+                            <h3 class="text-lg font-bold text-white">Fan Film Premiere: "Voyages of Enterprise-G"</h3>
+                            <p class="text-sm text-gray-300">The tactical division fan production team has released chapter 3 of their fan film series. Broadcast streamed live across sector channels.</p>
+                            <button class="lcars-btn lcars-btn-secondary px-3 py-1 text-xs rounded">WATCH PREMIERE</button>
+                        </div>
+
+                        <!-- News Card 3 -->
+                        <div class="bg-black/40 border-l-4 border-[var(--lcars-accent)] p-4 rounded-r-xl space-y-2">
+                            <span class="text-xs font-tech text-yellow-400">STARDATE 47610.9</span>
+                            <h3 class="text-lg font-bold text-white">Star Trek uniform Replica Workshop</h3>
+                            <p class="text-sm text-gray-300">Learn how to tailor high-quality screen-accurate Starfleet uniforms from TOS, TNG, and Voyager eras using official patterns.</p>
+                            <button class="lcars-btn lcars-btn-accent px-3 py-1 text-xs rounded">VIEW GUIDES</button>
+                        </div>
+
+                        <!-- News Card 4 -->
+                        <div class="bg-black/40 border-l-4 border-emerald-500 p-4 rounded-r-xl space-y-2">
+                            <span class="text-xs font-tech text-yellow-400">STARDATE 47598.2</span>
+                            <h3 class="text-lg font-bold text-white">Bridge Simulator Gaming Night</h3>
+                            <p class="text-sm text-gray-300">Multiplayer co-op bridge simulation session scheduled for this weekend. Tactical, Engineering, and Helm positions open.</p>
+                            <button class="lcars-btn bg-emerald-500 text-black px-3 py-1 text-xs rounded">REGISTER CREW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. ENLISTMENT / COMMISSION FORM & CERTIFICATE GENERATOR -->
+                <div id="tab-enlist" class="tab-pane hidden flex-1 flex flex-col gap-6">
+                    <div class="border-b-2 border-[var(--lcars-primary)] pb-3">
+                        <h2 class="text-3xl font-bold tracking-wider text-[var(--lcars-primary)]">STARFLEET COMMISSION APPLICATION</h2>
+                        <p class="text-sm text-gray-400 font-tech">OFFICIAL FAN DIVISION ENLISTMENT FORM</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Enlistment Form Input -->
+                        <form id="enlistment-form" onsubmit="generateCommission(event)" class="space-y-4 bg-black/40 p-5 rounded-xl border border-white/10">
+                            <div>
+                                <label class="block text-xs font-tech text-gray-300 mb-1">CADET FULL NAME</label>
+                                <input type="text" id="cadet-name" required placeholder="e.g. Jean-Luc Picard" class="w-full bg-black/70 border border-gray-700 rounded px-3 py-2 text-sm text-yellow-400 focus:outline-none focus:border-[var(--lcars-primary)]">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-tech text-gray-300 mb-1">DESIRED DEPARTMENT</label>
+                                    <select id="cadet-dept" class="w-full bg-black/70 border border-gray-700 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--lcars-primary)]">
+                                        <option value="Command">Command (Red)</option>
+                                        <option value="Operations">Operations / Eng (Gold/Yellow)</option>
+                                        <option value="Sciences">Sciences / Medical (Blue)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-tech text-gray-300 mb-1">INITIAL ASSIGNED RANK</label>
+                                    <select id="cadet-rank" class="w-full bg-black/70 border border-gray-700 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--lcars-primary)]">
+                                        <option value="Ensign">Ensign</option>
+                                        <option value="Lieutenant">Lieutenant</option>
+                                        <option value="Lt. Commander">Lt. Commander</option>
+                                        <option value="Commander">Commander</option>
+                                        <option value="Captain">Captain</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-tech text-gray-300 mb-1">ASSIGNED STARSHIP DIVISION</label>
+                                <input type="text" id="cadet-ship" required placeholder="e.g. USS Defiant NX-74205" class="w-full bg-black/70 border border-gray-700 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-[var(--lcars-primary)]">
+                            </div>
+
+                            <button type="submit" class="lcars-btn w-full py-3 rounded-lg text-base mt-2">GENERATE COMMISSION PAPERS</button>
+                        </form>
+
+                        <!-- Generated Dynamic Commission Certificate Display -->
+                        <div class="bg-slate-950 border-2 border-[var(--lcars-primary)] rounded-xl p-6 relative flex flex-col justify-between shadow-2xl overflow-hidden">
+                            <!-- Certificate Watermark Icon -->
+                            <svg class="absolute -right-10 -bottom-10 w-64 h-64 opacity-5 fill-current text-[var(--lcars-primary)]" viewBox="0 0 100 100">
+                                <path d="M50,5 C50,5 90,85 85,90 C80,95 55,75 50,75 C45,75 20,95 15,90 C10,85 50,5 50,5 Z"/>
+                            </svg>
+
+                            <div>
+                                <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+                                    <div class="text-xs font-tech text-[var(--lcars-accent)]">STARFLEET COMMAND ACADEMY</div>
+                                    <div class="text-xs font-tech text-yellow-400">OFFICIAL FAN DIVISION DIPLOMA</div>
+                                </div>
+
+                                <div class="text-center space-y-3 my-6">
+                                    <div class="text-xs text-gray-400 uppercase tracking-widest">This certifies that</div>
+                                    <div id="cert-name" class="text-2xl font-bold text-yellow-300 tracking-wider">CADET OFFICER</div>
+                                    <div class="text-xs text-gray-400">has been commissioned with rank of</div>
+                                    <div id="cert-rank" class="text-xl font-bold text-white uppercase">ENSIGN</div>
+                                    <div class="text-xs text-gray-400">and assigned to</div>
+                                    <div id="cert-ship" class="text-lg font-tech text-[var(--lcars-primary)]">USS ENTERPRISE DIVISION</div>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-gray-800 pt-4 flex justify-between items-end font-tech text-[10px] text-gray-400">
+                                <div>
+                                    <div>SECTOR COMMANDER: <span class="text-white">ADMIRAL VANCE</span></div>
+                                    <div>SECURITY CODE: <span class="text-emerald-400">ST-8849-ALPHA</span></div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="w-24 border-b border-gray-600 mb-1"></div>
+                                    <div>COMMAND SEAL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Bar Info -->
+                <footer class="mt-6 pt-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-xs font-tech text-gray-400 gap-2">
+                    <div>STARFLEET COMMAND TACTICAL DIVISION &copy; 2026 - NON-PROFIT STAR TREK FAN CLUB</div>
+                    <div class="flex gap-4">
+                        <span class="text-[var(--lcars-primary)]">LCARS OS 4.7</span>
+                        <span>FEDERATION APPROVED</span>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        /* ----------------------------------------------------
+           1. Dynamic Web Audio API Synthesizer (No missing MP3s)
+           ---------------------------------------------------- */
+        let audioCtx = null;
+        let isAudioMuted = false;
+        let warpOsc = null;
+        let warpGain = null;
+        let isWarpSpeedActive = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // Play standard LCARS Beep
+        function playBeep(freq = 800, type = 'sine', duration = 0.08) {
+            if (isAudioMuted) return;
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log('Audio playback initialized on click');
+            }
+        }
+
+        // Sound Toggle
+        function toggleAudio() {
+            isAudioMuted = !isAudioMuted;
+            const icon = document.getElementById('audio-icon');
+            const status = document.getElementById('audio-status');
+
+            if (isAudioMuted) {
+                icon.className = 'fa-solid fa-volume-xmark';
+                status.innerText = 'AUDIO OFF';
+                if (warpGain) warpGain.gain.value = 0;
+            } else {
+                icon.className = 'fa-solid fa-volume-high';
+                status.innerText = 'AUDIO ON';
+                playBeep(1200);
+            }
+        }
+
+        // Tactical SFX (Phasers, Torpedoes, Shields, Red Alert Siren)
+        function playTacticalSound(type) {
+            if (isAudioMuted) return;
+            initAudio();
+
+            const log = document.getElementById('tactical-log');
+
+            if (type === 'phaser') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.4);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.4);
+
+                if (log) log.innerHTML = `<div>[TACTICAL] Phasers discharged at target.</div>` + log.innerHTML;
+            } 
+            else if (type === 'torpedo') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+
+                if (log) log.innerHTML = `<div>[TACTICAL] Quantum Torpedo launched.</div>` + log.innerHTML;
+            }
+            else if (type === 'shield') {
+                playBeep(400, 'sine', 0.2);
+                setTimeout(() => playBeep(600, 'sine', 0.2), 100);
+                if (log) log.innerHTML = `<div>[DEFENSE] Deflector shield harmonics aligned.</div>` + log.innerHTML;
+            }
+            else if (type === 'hail') {
+                playBeep(880, 'sine', 0.15);
+                setTimeout(() => playBeep(1320, 'sine', 0.25), 150);
+                if (log) log.innerHTML = `<div>[COMM] Subspace hailing frequency open.</div>` + log.innerHTML;
+            }
+        }
+
+        // Red Alert Mode Toggle
+        let isRedAlert = false;
+        function toggleRedAlert() {
+            isRedAlert = !isRedAlert;
+            const body = document.body;
+            const btn = document.getElementById('red-alert-btn');
+            const status = document.getElementById('subsystem-status');
+
+            if (isRedAlert) {
+                body.classList.add('red-alert-active');
+                btn.classList.add('bg-red-700', 'animate-pulse');
+                status.innerText = 'RED ALERT ACTIVE';
+                status.className = 'text-xs tracking-wider text-red-500 font-bold';
+                
+                // Siren SFX
+                playBeep(440, 'sawtooth', 0.4);
+                setTimeout(() => playBeep(350, 'sawtooth', 0.4), 400);
+            } else {
+                body.classList.remove('red-alert-active');
+                btn.classList.remove('bg-red-700', 'animate-pulse');
+                status.innerText = 'SYSTEMS NOMINAL';
+                status.className = 'text-xs tracking-wider text-gray-300';
+                playBeep(800, 'sine', 0.1);
+            }
+        }
+
+        /* ----------------------------------------------------
+           2. Dynamic Era Theme Switcher (TOS, TNG, DS9, VOY)
+           ---------------------------------------------------- */
+        function setEraTheme(era) {
+            playBeep(era === 'tos' ? 600 : era === 'ds9' ? 500 : era === 'voy' ? 1100 : 900);
+            const body = document.body;
+
+            body.classList.remove('theme-tos', 'theme-tng', 'theme-ds9', 'theme-voy');
+            body.classList.add(`theme-${era}`);
+
+            // Highlight Theme Buttons
+            document.querySelectorAll('.theme-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-yellow-500/20', 'bg-amber-500/20', 'bg-red-500/20', 'bg-cyan-500/20');
+            });
+            event.target.classList.add('bg-white/20');
+        }
+
+        /* ----------------------------------------------------
+           3. Navigation & Tab Control
+           ---------------------------------------------------- */
+        function switchTab(tabId) {
+            playBeep(750);
+            // Hide all tabs
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.add('hidden');
+            });
+            // Show target tab
+            const target = document.getElementById(`tab-${tabId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+        }
+
+        /* ----------------------------------------------------
+           4. Personnel Roster Data & Filtering
+           ---------------------------------------------------- */
+        const rosterData = [
+            { name: "Jean-Luc Picard", rank: "Admiral", dept: "Command", ship: "USS Enterprise-E", status: "Active HQ", avatar: "https://placehold.co/100x100/ce2029/ffffff?text=JLP" },
+            { name: "William T. Riker", rank: "Captain", dept: "Command", ship: "USS Titan", status: "Sector 002", avatar: "https://placehold.co/100x100/ce2029/ffffff?text=WTR" },
+            { name: "Geordi La Forge", rank: "Commodore", dept: "Operations", ship: "Fleet Museum", status: "Atopia", avatar: "https://placehold.co/100x100/e2b13c/000000?text=GLF" },
+            { name: "Data Soong", rank: "Captain", dept: "Operations", ship: "USS Enterprise-F", status: "Deep Space", avatar: "https://placehold.co/100x100/e2b13c/000000?text=DATA" },
+            { name: "Beverly Crusher", rank: "Admiral", dept: "Sciences", ship: "Starfleet Medical", status: "Sol Sector", avatar: "https://placehold.co/100x100/2a7bb6/ffffff?text=BC" },
+            { name: "Seven of Nine", rank: "Captain", dept: "Command", ship: "USS Enterprise-G", status: "Active Sector", avatar: "https://placehold.co/100x100/ce2029/ffffff?text=7of9" }
+        ];
+
+        function renderRoster(filter = 'all') {
+            const grid = document.getElementById('roster-grid');
+            grid.innerHTML = '';
+
+            rosterData.forEach(p => {
+                if (filter !== 'all' && p.dept !== filter) return;
+
+                const deptColor = p.dept === 'Command' ? 'border-red-500' : p.dept === 'Operations' ? 'border-yellow-500' : 'border-blue-500';
+
+                const card = `
+                    <div class="bg-black/40 border-l-4 ${deptColor} border-y border-r border-white/10 p-4 rounded-r-xl flex items-center gap-4">
+                        <img src="${p.avatar}" alt="${p.name}" class="w-14 h-14 rounded-full border border-gray-600">
+                        <div>
+                            <div class="text-xs font-tech text-gray-400">${p.rank.toUpperCase()}</div>
+                            <div class="text-lg font-bold text-white">${p.name}</div>
+                            <div class="text-xs text-[var(--lcars-accent)] font-tech">${p.ship}</div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function filterRoster(dept) {
+            playBeep(900);
+            renderRoster(dept);
+        }
+
+        /* ----------------------------------------------------
+           5. Tactical Simulator Gauges Control
+           ---------------------------------------------------- */
+        function updatePower(sys, val) {
+            const label = document.getElementById(`power-${sys}-val`);
+            if (label) label.innerText = `${val}%`;
+            playBeep(400 + parseInt(val) * 4, 'sine', 0.03);
+        }
+
+        function resetSim() {
+            playBeep(1000);
+            ['warp', 'shield', 'weapons', 'impulse'].forEach(sys => {
+                const slider = document.querySelector(`input[oninput*="${sys}"]`);
+                if (slider) {
+                    slider.value = 80;
+                    updatePower(sys, 80);
+                }
+            });
+        }
+
+        /* ----------------------------------------------------
+           6. Sector Radar Info Click Trigger
+           ---------------------------------------------------- */
+        function showChapterInfo(name, loc, co, cadets) {
+            playBeep(950);
+            document.getElementById('chap-title').innerText = name.toUpperCase();
+            document.getElementById('chap-location').innerText = loc;
+            document.getElementById('chap-co').innerText = co;
+            document.getElementById('chap-cadets').innerText = cadets;
+        }
+
+        /* ----------------------------------------------------
+           7. Enlistment Commission Form Generator
+           ---------------------------------------------------- */
+        function generateCommission(e) {
+            e.preventDefault();
+            playBeep(1100);
+
+            const name = document.getElementById('cadet-name').value;
+            const rank = document.getElementById('cadet-rank').value;
+            const ship = document.getElementById('cadet-ship').value;
+
+            document.getElementById('cert-name').innerText = name.toUpperCase();
+            document.getElementById('cert-rank').innerText = rank.toUpperCase();
+            document.getElementById('cert-ship').innerText = ship.toUpperCase();
+        }
+
+        /* ----------------------------------------------------
+           8. Dynamic Canvas Starfield Background & Warp Speed
+           ---------------------------------------------------- */
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        const numStars = 250;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width - canvas.width / 2,
+                y: Math.random() * canvas.height - canvas.height / 2,
+                z: Math.random() * canvas.width
+            });
+        }
+
+        function toggleWarpSpeed() {
+            isWarpSpeedActive = !isWarpSpeedActive;
+            const btnText = document.getElementById('warp-text');
+            if (isWarpSpeedActive) {
+                btnText.innerText = 'IMPULSE SPEED';
+                playBeep(300, 'sawtooth', 0.5);
+            } else {
+                btnText.innerText = 'WARP SPEED';
+                playBeep(600, 'sine', 0.2);
+            }
+        }
+
+        function animateStarfield() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const speed = isWarpSpeedActive ? 35 : 2;
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            stars.forEach(star => {
+                star.z -= speed;
+                if (star.z <= 0) {
+                    star.z = canvas.width;
+                    star.x = Math.random() * canvas.width - cx;
+                    star.y = Math.random() * canvas.height - cy;
+                }
+
+                const k = 128 / star.z;
+                const px = star.x * k + cx;
+                const py = star.y * k + cy;
+
+                if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+                    const size = Math.max(0.5, (1 - star.z / canvas.width) * (isWarpSpeedActive ? 4 : 2.5));
+                    ctx.fillStyle = isWarpSpeedActive ? '#00ccff' : '#ffffff';
+                    
+                    if (isWarpSpeedActive) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(0, 204, 255, 0.6)';
+                        ctx.lineWidth = size;
+                        ctx.moveTo(px, py);
+                        ctx.lineTo(px + (star.x * 0.05), py + (star.y * 0.05));
+                        ctx.stroke();
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(px, py, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animateStarfield);
+        }
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderRoster();
+            animateStarfield();
+
+            // Dynamic Stardate Ticker
+            setInterval(() => {
+                const sd = document.getElementById('stardate-display');
+                if (sd) {
+                    const currentSD = (47634.1 + (Date.now() % 100000) / 10000).toFixed(1);
+                    sd.innerText = currentSD;
+                }
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
