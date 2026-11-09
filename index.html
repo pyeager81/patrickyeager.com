@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Yeager | Fractional CIO & Executive IT Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            gold: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            border-image: linear-gradient(to right, #0284c7, #6366f1) 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 glass-panel transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                        PY
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white block">Patrick Yeager</span>
+                        <span class="text-xs text-sky-600 dark:text-sky-400 font-medium block -mt-1 tracking-wider uppercase">Executive IT & Tech Strategy</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">About</a>
+                    <a href="#leadership" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Leadership</a>
+                    <a href="#consulting" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">PYTech Consulting</a>
+                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Featured Projects</a>
+                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Action Buttons & Theme Toggle -->
+                <div class="hidden md:flex items-center gap-4">
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" aria-label="Toggle Theme" class="p-2.5 rounded-xl bg-slate-200/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                        <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                    <!-- External Calendar / PYTech Consultation CTA -->
+                    <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-semibold text-sm shadow-md shadow-sky-500/25 hover:opacity-95 hover:shadow-lg hover:shadow-sky-500/35 transition-all inline-flex items-center gap-2">
+                        <span>Schedule Consultation</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden gap-3">
+                    <button id="mobileThemeToggle" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                        <i id="mobileThemeIcon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <button id="mobileMenuBtn" aria-label="Toggle Mobile Menu" class="p-2 text-slate-700 dark:text-slate-300 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">About</a>
+            <a href="#leadership" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Leadership</a>
+            <a href="#consulting" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">PYTech Consulting</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Featured Projects</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Contact</a>
+            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="w-full mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-semibold text-center text-sm shadow-md block">
+                Schedule Consultation <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="relative py-24 md:py-32 overflow-hidden border-b border-slate-200 dark:border-slate-800/80">
+            <!-- Background Accent Visuals -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-sky-500/10 to-indigo-500/10 dark:from-sky-500/20 dark:to-indigo-500/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-700 dark:text-sky-300 text-xs font-semibold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                            Available for Fractional CIO & Executive Advisory
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                            Fractional CIO & Senior IT <span class="gradient-text">Executive</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl font-normal leading-relaxed mx-auto lg:mx-0">
+                            Over <strong>25 years</strong> driving digital transformation, multi-site healthcare IT infrastructure, HIPAA/PHI regulatory auditing, and enterprise workflow automation.
+                        </p>
+
+                        <!-- Key Highlight Metrics -->
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+                            <div class="text-center lg:text-left">
+                                <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white block">25+</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Years Exp.</span>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white block">99.9%</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Uptime Ops</span>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white block">100%</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">HIPAA Audit</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Actions (Flat Links) -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#projects" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold text-center hover:opacity-90 transition-all shadow-md">
+                                View Work & Platforms
+                            </a>
+                            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-center hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all inline-flex items-center justify-center gap-2">
+                                <span>Schedule Google Calendar Call</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Executive Card Visual -->
+                    <div class="lg:col-span-5">
+                        <div class="relative max-w-md mx-auto">
+                            <!-- Outer glow -->
+                            <div class="absolute -inset-1 bg-gradient-to-r from-sky-600 to-indigo-600 rounded-2xl blur opacity-30 dark:opacity-50"></div>
+                            
+                            <!-- Main Executive Profile Card -->
+                            <div class="relative bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-800 space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center text-sky-400 font-extrabold text-2xl border border-slate-700 shadow-md">
+                                        PY
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Patrick Yeager</h3>
+                                        <p class="text-sm text-sky-600 dark:text-sky-400 font-medium">Founder & Managing Principal, PYTech</p>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">Orlando / Central FL & Remote</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-100 dark:border-slate-800">
+                                    <div class="flex items-start gap-3">
+                                        <i class="fa-solid fa-shield-halved text-sky-500 mt-1"></i>
+                                        <span>Specializing in <strong>Healthcare IT Risk Mitigation</strong> & Regulatory Governance.</span>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <i class="fa-solid fa-network-wired text-sky-500 mt-1"></i>
+                                        <span>Architect of multi-site network resilience & PHI audit automation.</span>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <i class="fa-solid fa-code text-sky-500 mt-1"></i>
+                                        <span>Full-stack Enterprise Developer & Systems Architect.</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/50">
+                                    <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Core Leadership Philosophy</div>
+                                    <p class="text-xs italic text-slate-700 dark:text-slate-300 leading-relaxed">
+                                        "Aligning scalable technical infrastructure directly with business profitability, regulatory compliance, and seamless end-user operations."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Core Competencies Section -->
+        <section id="about" class="py-20 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Core Expertise</h2>
+                    <p class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        Strategic Vision Meets Executive IT Execution
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                        With decades of experience spanning healthcare systems, enterprise IT governance, and custom cloud solutions, I bridge the gap between high-level strategic leadership and technical compliance.
+                    </p>
+                </div>
+
+                <!-- Competencies Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-hospital-user"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Healthcare IT & Multi-Site Ops</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Architecting resilient infrastructure for outpatient facilities, clinical EHR integrations, high-availability telemetry, and multi-location networking.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Fractional CIO & Leadership</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Providing executive-level IT steering, vendor negotiation, team restructuring, CAPEX/OPEX budget optimization, and long-term tech roadmaps.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">HIPAA & PHI Compliance Audits</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Ensuring rigorous regulatory standards, automated data exposure auditing, business associate agreement (BAA) verification, and risk mitigation.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Enterprise Automation & Integrations</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Eliminating operational bottlenecks through custom API integrations, script automated workflows, legacy-to-cloud migrations, and modern web applications.
+                        </p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Cybersecurity & Zero Trust</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Implementing robust security perimeters, multi-factor authentication policies, endpoint protection frameworks, and disaster recovery protocol.
+                        </p>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 transition-all hover:shadow-lg group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cubes-stacked"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Custom Software Engineering</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Building purpose-built Web/SaaS platforms tailored to niche industry compliance, operational tracking, and customer experience.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Leadership & Timeline -->
+        <section id="leadership" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Leadership Track Record</h2>
+                    <p class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        Proven Executive Impact
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 text-base">
+                        A history of steering organizations through technological scale, regulatory scrutiny, and operational modernization.
+                    </p>
+                </div>
+
+                <!-- Timeline / Experience Cards -->
+                <div class="max-w-4xl mx-auto space-y-8">
+                    
+                    <!-- Leadership Item 1 -->
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-sky-500 to-indigo-600"></div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Managing Director & Principal Consultant</h3>
+                                <p class="text-sm font-semibold text-sky-600 dark:text-sky-400">PYTech Consulting</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 dark:text-sky-300 text-xs font-semibold self-start sm:self-center">
+                                2018 - Present
+                            </span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                            Delivering strategic IT advisory, HIPAA compliance auditing, and custom software solutions for mid-market enterprises and specialized healthcare organizations.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Fractional CIO</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">PHI Security</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Cloud Architecture</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium">Workflow Automation</span>
+                        </div>
+                    </div>
+
+                    <!-- Leadership Item 2 -->
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-slate-400 dark:bg-slate-700"></div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Director of Information Technology</h3>
+                                <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">Regional Healthcare & Outpatient Operations</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold self-start sm:self-center">
+                                Senior Leadership
+                            </span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                            Led IT operations across multiple clinical locations. Managed infrastructure scaling, EHR connectivity, vendor contract restructuring, zero-downtime facility expansions, and SOC2/HIPAA compliance frameworks.
+                        </p>
+                        <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1 mb-4">
+                            <li>Reduced operational overhead by 25% through cloud migration and vendor consolidation.</li>
+                            <li>Achieved 100% compliance score during stringent external regulatory security audits.</li>
+                            <li>Engineered high-availability network redundancy across 15+ satellite facilities.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Leadership Item 3 -->
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-slate-400 dark:bg-slate-700"></div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Senior Systems Architect & IT Infrastructure Manager</h3>
+                                <p class="text-sm font-semibold text-slate-600 dark:text-slate-400">Enterprise Technology Services</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold self-start sm:self-center">
+                                Operations & Systems
+                            </span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            Spearheaded core network architecture, data center operations, virtualization projects, disaster recovery design, and enterprise-wide technical support teams.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PYTech Consulting Services -->
+        <section id="consulting" class="py-20 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">PYTech Consulting</h2>
+                    <p class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        Targeted Solutions for Growing Enterprises
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 text-base">
+                        Flexible advisory engagement models to elevate tech leadership, audit security posture, and optimize workflows.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <!-- Service 1 -->
+                    <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 text-2xl font-bold">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Fractional CIO Advisory</h3>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                            High-level strategic leadership without the executive full-time cost. Get guidance on strategic roadmaps, team building, vendor management, and tech stack alignment.
+                        </p>
+                        <ul class="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Executive IT Steering & Strategy</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Annual Budgeting & Cost Rationalization</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Vendor & Contract Negotiation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-2xl font-bold">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Comprehensive IT & HIPAA Audits</h3>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                            Rigorous operational and cybersecurity audits tailored to healthcare regulations. Identify exposure vulnerabilities, PHI handling gaps, and infrastructure bottlenecks.
+                        </p>
+                        <ul class="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> HIPAA & PHI Exposure Assessments</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Infrastructure Security Reviews</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Actionable Remediation Reports</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-2xl font-bold">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Systems Modernization</h3>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                            Transition legacy systems to cloud-native, secure architecture with zero operational disruption. Optimize speed, reliability, and security compliance.
+                        </p>
+                        <ul class="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Legacy Systems Refactoring</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Cloud Migration (AWS / Azure)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Database & API Integration</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Custom Software Engineering</h3>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                            Development of web applications, specialized compliance portals, and operational management systems designed specifically to solve complex enterprise problems.
+                        </p>
+                        <ul class="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Custom Web Applications & Platforms</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Compliance & Workflow Automation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> Portal Architecture & APIs</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Featured Projects Showcase -->
+        <section id="projects" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-3">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Portfolio & SaaS Platforms</h2>
+                        <p class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            Signature Projects & Platforms
+                        </p>
+                    </div>
+
+                    <!-- Project Category Filter -->
+                    <div class="flex flex-wrap gap-2" id="projectFilter">
+                        <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-sky-600 text-white transition-all">All Projects</button>
+                        <button onclick="filterProjects('compliance')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Healthcare & Compliance</button>
+                        <button onclick="filterProjects('lms')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Workforce Training / LMS</button>
+                        <button onclick="filterProjects('platforms')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Web Applications</button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8" id="projectsGrid">
+                    
+                    <!-- Project 1: CompliantAcademy (NEW) -->
+                    <div class="project-card compliance lms flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-md">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 text-xs font-semibold">
+                                    Recurring SaaS / LMS Platform
+                                </span>
+                                <i class="fa-solid fa-graduation-cap text-sky-500 text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">CompliantAcademy™</h3>
+                            <p class="text-xs text-sky-600 dark:text-sky-400 font-semibold -mt-2">Workforce Healthcare Compliance LMS</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Turnkey LMS engineered for multi-site healthcare practices. Delivers mandatory annual HIPAA, OSHA Bloodborne Pathogens, HazCom, and regulatory compliance courses with per-seat subscription licensing.
+                            </p>
+                            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/50 space-y-1">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-200 block"><i class="fa-solid fa-award text-amber-500 mr-1.5"></i> Legally Mandated & Recurring Demand</span>
+                                <p class="text-[11.5px] text-slate-500 dark:text-slate-400">Automates automated staff seat provisioning, recurring annual recertification reminders, and instant audit-ready compliance reporting for practice managers.</p>
+                            </div>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">HIPAA / OSHA</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Per-Seat Subscription</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Audit Reports</span>
+                            </div>
+                            <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
+                                PYTech Info <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: ReleaseRight -->
+                    <div class="project-card compliance flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-md">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+                                    Healthcare & Compliance
+                                </span>
+                                <i class="fa-solid fa-shield-cat text-slate-400 text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">ReleaseRight™</h3>
+                            <p class="text-xs text-sky-600 dark:text-sky-400 font-semibold -mt-2">PHI Release & Audit Suite</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Engineered an automated regulatory tracking solution for medical records request verification, legal PHI disclosure logging, and HIPAA release auditing across clinical environments.
+                            </p>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">HIPAA</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">PHI Security</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Audit Logs</span>
+                            </div>
+                            <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
+                                PYTech Info <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: WhereWeRolling -->
+                    <div class="project-card platforms flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-md">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
+                                    Web Platform
+                                </span>
+                                <i class="fa-solid fa-map-location-dot text-slate-400 text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">WhereWeRolling</h3>
+                            <p class="text-xs text-sky-600 dark:text-sky-400 font-semibold -mt-2">Martial Arts Directory Platform</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Scalable directory platform connecting martial arts practitioners, academy directors, and tournament organizers with geo-location indexing.
+                            </p>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Full Stack</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Geo API</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">SaaS Directory</span>
+                            </div>
+                            <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
+                                PYTech Info <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: AuditTrack Pro -->
+                    <div class="project-card compliance flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-sky-500 transition-all shadow-md">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold">
+                                    Operational Governance
+                                </span>
+                                <i class="fa-solid fa-list-check text-slate-400 text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">AuditTrack Pro</h3>
+                            <p class="text-xs text-sky-600 dark:text-sky-400 font-semibold -mt-2">Multi-Site Facility Audit Suite</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Enterprise operational dashboard for standardized inspection, compliance scorecards, and automated maintenance tracking across distributed clinical campuses.
+                            </p>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Operations</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Analytics</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">Multi-Site</span>
+                            </div>
+                            <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
+                                PYTech Info <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Direct Contact Section (Flat Links - No Forms) -->
+        <section id="contact" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 rounded-3xl p-8 sm:p-12 lg:p-16 border border-slate-800 text-white shadow-2xl relative overflow-hidden">
+                    
+                    <!-- Background Glow -->
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="grid lg:grid-cols-12 gap-12 items-center relative z-10">
+                        
+                        <!-- Contact Info Left -->
+                        <div class="lg:col-span-6 space-y-6">
+                            <h2 class="text-xs font-bold uppercase tracking-widest text-sky-400">Direct Contact & Scheduling</h2>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Let's Discuss Your Technology Roadmap</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Whether you require Fractional CIO guidance, a HIPAA compliance security assessment, or LMS training through CompliantAcademy™, connect directly or schedule a calendar session.
+                            </p>
+
+                            <div class="space-y-4 pt-4 border-t border-slate-800">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-sky-400">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400">Direct Email</p>
+                                        <a href="mailto:contact@patrickyeager.com" class="text-sm font-semibold hover:text-sky-400 transition-colors">contact@patrickyeager.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-sky-400">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400">Consulting Firm Website</p>
+                                        <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold hover:text-sky-400 transition-colors inline-flex items-center gap-1.5">
+                                            <span>PYTech Consulting (pytech.io)</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-sky-400">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400">Executive LinkedIn</p>
+                                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold hover:text-sky-400 transition-colors">linkedin.com/in/patrickyeager</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Scheduling Card -->
+                        <div class="lg:col-span-6 bg-slate-900/90 p-8 rounded-2xl border border-slate-800 space-y-6">
+                            <div class="space-y-2">
+                                <h4 class="text-xl font-bold text-white">Direct Executive Consultation</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Schedule a 30-minute discovery session directly through Google Calendar or head over to PYTech Consulting for enterprise inquiries.
+                                </p>
+                            </div>
+
+                            <div class="space-y-3 pt-2">
+                                <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-sky-500/20 hover:opacity-95 transition-all inline-flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-calendar-days text-base"></i>
+                                    <span>Schedule via Google Calendar</span>
+                                </a>
+
+                                <a href="https://pytech.io" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-6 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 font-semibold text-sm hover:bg-slate-700/60 transition-all inline-flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                    <span>Visit PYTech Consulting Website</span>
+                                </a>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-xs text-slate-400 space-y-1">
+                                <span class="font-semibold text-sky-400 block">Response Commitment:</span>
+                                Direct email inquiries and calendar bookings are confirmed within 24 business hours.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-slate-900 dark:text-white">PatrickYeager.com</span>
+                <span>© <span id="currentYear"></span> Patrick Yeager / PYTech Consulting. All rights reserved.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#about" class="hover:text-sky-500 transition-colors">About</a>
+                <a href="#consulting" class="hover:text-sky-500 transition-colors">Consulting Services</a>
+                <a href="#projects" class="hover:text-sky-500 transition-colors">Projects & LMS</a>
+                <a href="#contact" class="hover:text-sky-500 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Dark / Light Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+        const html = document.documentElement;
+
+        function updateThemeIcons(isDark) {
+            if (isDark) {
+                themeIcon.className = 'fa-solid fa-sun text-amber-400 text-lg';
+                mobileThemeIcon.className = 'fa-solid fa-sun text-amber-400';
+            } else {
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+                mobileThemeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeIcons(false);
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeIcons(true);
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+
+        // Check local storage preference
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+            updateThemeIcons(false);
+        } else {
+            html.classList.add('dark');
+            updateThemeIcons(true);
+        }
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Project Filtering System
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white', 'active');
+                btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            });
+
+            event.target.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+            event.target.classList.add('bg-sky-600', 'text-white', 'active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
